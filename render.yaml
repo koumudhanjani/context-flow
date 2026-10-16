@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: contextflow-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: FIREBASE_PROJECT_ID
+        value: context-flow-70b11
+      - key: AUTH_REQUIRED
+        value: "false"
+      - key: WARMUP_ON_STARTUP
+        value: "true"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
