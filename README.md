@@ -133,8 +133,8 @@ contextflow/
 
 ### 1. Clone
 ```bash
-git clone https://github.com/<your-username>/contextflow.git
-cd contextflow
+git clone https://github.com/koumudhanjani/context-flow.git
+cd context-flow
 ```
 
 ### 2. Firebase setup
@@ -192,7 +192,7 @@ cd backend && pip install -r requirements-dev.txt && pytest -q
 - [ ] Docker Compose and one-click deploy (Render + Firebase Hosting)
 
 ## 👤 Author
-**Your Name** · B.Tech CSE · [LinkedIn](https://linkedin.com/in/your-profile) · [GitHub](https://github.com/your-username)
+**Anjani Koumudh** · B.Tech CSE · [GitHub](https://github.com/koumudhanjani)
 
 ## 📄 License
 MIT
