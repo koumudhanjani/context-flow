@@ -15,12 +15,17 @@ SYSTEM_PROMPT = (
 )
 
 
+def _is_key_set(val: str) -> bool:
+    v = (val or "").strip()
+    return bool(v) and not v.startswith(("paste-", "your-"))
+
+
 def available_providers() -> List[Dict[str, str]]:
     s = get_settings()
     providers = []
-    if s.gemini_api_key:
+    if _is_key_set(s.gemini_api_key):
         providers.append({"id": "gemini", "label": "Google Gemini", "model": s.gemini_model})
-    if s.groq_api_key:
+    if _is_key_set(s.groq_api_key):
         providers.append({"id": "groq", "label": "Groq", "model": s.groq_model})
     return providers
 
@@ -98,12 +103,12 @@ async def _groq(prompt: str, query: str, model: str) -> Dict:
 async def run_llm(provider: str, prompt: str, query: str = "", model: Optional[str] = None) -> Dict:
     s = get_settings()
     if provider == "gemini":
-        if not s.gemini_api_key:
+        if not _is_key_set(s.gemini_api_key):
             raise HTTPException(400, "GEMINI_API_KEY is not configured on the server.")
         model = model or s.gemini_model
         fn = _gemini
     elif provider == "groq":
-        if not s.groq_api_key:
+        if not _is_key_set(s.groq_api_key):
             raise HTTPException(400, "GROQ_API_KEY is not configured on the server.")
         model = model or s.groq_model
         fn = _groq
